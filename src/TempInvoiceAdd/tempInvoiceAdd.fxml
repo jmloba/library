@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="my_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TempInvoiceAdd.TempInvoiceAddController">
+   <children>
+      <VBox layoutY="-8.0" prefHeight="535.0" prefWidth="627.0" AnchorPane.bottomAnchor="59.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="66.0" prefWidth="600.0">
+               <children>
+                  <Text fill="#1120eb" strokeType="OUTSIDE" strokeWidth="0.0" text="Invoice Entry">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="tf_date" maxHeight="40.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="date">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <DatePicker fx:id="td_date" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Itemnumber">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tf_itemnumber" prefHeight="31.0" prefWidth="361.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="75.0" prefHeight="75.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Description">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextArea fx:id="ta_desc" prefHeight="48.0" prefWidth="331.0" wrapText="true" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Brand">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cb_brand" prefHeight="31.0" prefWidth="330.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Category">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cb_category" prefHeight="31.0" prefWidth="330.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Quantity">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tf_quantity" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Price">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tf_price" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox maxHeight="40.0" prefHeight="30.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="147.0" text="Amount">
+                     <HBox.margin>
+                        <Insets left="60.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tf_amount" editable="false" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="58.0" prefHeight="58.0" prefWidth="603.0">
+               <children>
+                  <Button fx:id="btn_save" maxWidth="150.0" mnemonicParsing="false" onAction="#routine_save" prefWidth="100.0" text="Save">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btn_cancel" maxWidth="150.0" mnemonicParsing="false" onAction="#routine_cancel" prefWidth="100.0" text="cancel" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

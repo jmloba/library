@@ -1,0 +1,16 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+.setup-button{
+  -fx-background-color:  #4535C1;
+  -fx-text-fill: white;
+}
+.setup-button:hover{
+  -fx-background-color:  #028801;
+  -fx-text-fill: #ffffff;
+  
+}

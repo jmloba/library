@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="myPane" prefHeight="527.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="temp_invEntry.InvEntryController">
+  <stylesheets>
+    <URL value="@inventry.css" />
+  </stylesheets>
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="32.0" layoutY="24.0" prefHeight="309.0" prefWidth="498.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="21.0" prefWidth="149.0" text="Invoice Date" />
+                  <DatePicker fx:id="tf_date" />
+               </children>
+            </HBox>
+            <TextField fx:id="tf_Itemno" prefHeight="30.0" prefWidth="300.0" promptText="Item Number" style="-fx-background-color: 7C444F;" stylesheets="@../addbook/addbook.css">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_Desc" prefHeight="30.0" prefWidth="300.0" promptText="Description">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_BrandCode" prefHeight="30.0" prefWidth="300.0" promptText="Brand Code">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_CategoryCode" prefHeight="30.0" prefWidth="300.0" promptText="Category Code">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_quantity" prefHeight="30.0" prefWidth="300.0" promptText="Quantity">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_price" prefHeight="30.0" prefWidth="300.0" promptText="Price">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField fx:id="tf_amount" prefHeight="30.0" prefWidth="300.0" promptText="Amount">
+               <padding>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <HBox alignment="BOTTOM_CENTER" maxHeight="200.0" prefHeight="80.0" prefWidth="412.0">
+               <children>
+                  <Button fx:id="btn_save" maxHeight="30.0" maxWidth="200.0" mnemonicParsing="false" onAction="#addTempInvoice" prefHeight="30.0" prefWidth="200.0" styleClass="global-button" stylesheets="@../global/global.css" text="Save">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btn_cancel" maxHeight="30.0" maxWidth="200.0" mnemonicParsing="false" onAction="#cancelTempInvoice" prefHeight="30.0" prefWidth="200.0" styleClass="global-button" stylesheets="@../global/global.css" text="Cancel">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" top="20.0" />
+         </padding>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

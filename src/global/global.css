@@ -1,0 +1,16 @@
+.global-button{
+  -fx-background-color:  #4535C1;
+  -fx-text-fill: white;
+}
+.global-button:hover{
+  -fx-background-color:  #028801;
+  -fx-text-fill  : #FFDE4D;
+  -fx-font-size  : 1.2em;
+  
+}
+.global-entry-field{
+  -fx-background-color:  #FFFDF0;
+  -fx-font:500;
+  
+}
+
