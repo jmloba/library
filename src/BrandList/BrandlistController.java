@@ -51,9 +51,6 @@ ObservableList<fdBrand> list = FXCollections.observableArrayList();
   
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-//     DatabaseConnection connect = new DatabaseConnection();
-//    Common_Var.connew = connect.getConnection();
-    connew =Common_Var.connew;
     handler = DatabaseHandler.getInstance() ;
     boolean showmessage = Common_Var.showmessage;
     viewCurrentConnection.showCurrentConnection("BrandList ", "Brand List", connew);

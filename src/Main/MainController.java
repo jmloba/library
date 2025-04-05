@@ -41,6 +41,8 @@ import javafx.stage.StageStyle;
 import listmember.MemberListController;
 import FileUpdateRoutines.UpdateBook;
 import generalRoutines.showmessages;
+import javafx.scene.layout.StackPane;
+import util.LibraryAssistantUtil;
 
 /**
  * FXML Controller class
@@ -68,11 +70,7 @@ public class MainController implements Initializable {
   @FXML  private Text tx_availability;
   @FXML  private Button btn_issue;
   
-//   private TextField tf_Bookid;
-//  private TextField tf_RenewSub_Title;
-//  private TextField tf_RenewSub_Author;
-//  private TextField tf_RenewSub_Publishr;
-//  private TextField tf_Borrowed_bookid;
+
   ObservableList<fdBookIssue> list_BookIssue = FXCollections.observableArrayList();
   Connection connew = null;
   DatabaseHandler  handler;
@@ -80,21 +78,16 @@ public class MainController implements Initializable {
   int flag_member = 0;
   @FXML
   private Text tx_mainconnection;
+  @FXML
+  private StackPane rootPane;
     
   
-  /**
-   * Initializes the controller class.
-   */
+
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    DatabaseConnection connect = new DatabaseConnection();
-    Common_Var.connew = connect.getConnection();
+    handler =  DatabaseHandler.getInstance();
     Common_Var.showmessage = true;
-    connew =Common_Var.connew;
-    
-    
-    tx_mainconnection.setText(connew.toString());
-    handler = DatabaseHandler.getInstance() ;
+    tx_mainconnection.setText(handler.connew.toString());
     btn_issue.setDisable(true);
     init_Column_IssueTable();
     
@@ -199,80 +192,20 @@ public class MainController implements Initializable {
     }
     
   }  
-  
-@FXML
-  private void call_addBrand(ActionEvent event) {
-    loadWindow("/BrandAdd/brandAdd.fxml","Brand Add REcord");
-  }
-  @FXML
-  private void call_addBook(ActionEvent event) {
-    loadWindow("/addbook/FXMLDocument.fxml","Add Book");
-  }
-
-  @FXML
-  private void call_displayMembers(ActionEvent event) {
-    loadWindow("/listmember/MemberList.fxml","Member List");
-  }
-
-    @FXML
-  private void call_addMember(ActionEvent event) {
-    loadWindow("/addmember/addMember.fxml","Add to Member (table)");
-  }
-
-  @FXML
-  private void call_displayBooks(ActionEvent event) {
-    loadWindow("/listbook/BookList.fxml","Book List");
-  }
- @FXML
-  private void call_displayBrand(ActionEvent event) {
-     loadWindow("/BrandList/brandlist.fxml","Temp");
-  }
-   @FXML
-  private void call_settings(ActionEvent event) {
-      loadWindow("/Settings/Settings.fxml","Settings");
-  }
-
-  @FXML
-  private void call_displayInvoiceTemp(ActionEvent event) {
-    loadWindow("/temp_inv/invtemp.fxml","Temp");
-//    loadWindow("/listbook/BookList.fxml","Book List");
-
-  }
-void loadWindow(String loc, String title){
+  void loadWindow(String loc, String title){
     try {
       Parent parent =FXMLLoader.load(getClass().getResource(loc));
       Stage stage = new Stage(StageStyle.DECORATED);
       stage.setTitle(title);
       stage.setScene(new Scene(parent));
       stage.show();
+      LibraryAssistantUtil.setStageIcon(stage);
     } catch (IOException ex) {
       Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
     }
           
 }
 
-  
-  
-  @FXML
-  private void call_addTempInvoice(ActionEvent event) {
-    loadWindow("/temp_invEntry/invEntry.fxml","Add Temp Invoice Entry");
-  }
-
-  @FXML
-  private void call_addCategory(ActionEvent event) {
-    loadWindow("/CategoryAdd/CategoryAdd.fxml","Category Add REcord");
-  }
-
-  @FXML
-  private void call_listCategory(ActionEvent event) {
-    loadWindow("/CategoryList/CategoryList.fxml","Category list");
-  }
-
-
-  @FXML
-  private void call_addInvoice2(ActionEvent event) {
-    loadWindow("/TempInvoiceAdd/tempInvoiceAdd.fxml","Add Temp Invoice Entry 2");
-  }
 
   
   @FXML
@@ -319,27 +252,35 @@ void loadWindow(String loc, String title){
   }
 
   private void saveBookIssue(String book_code, String member_id) {
-    try {
-      String insertRecord = "Insert into bookissuelog "
-              + "( member_id, bookcode)"
-              + " VALUES(? ,? )";
-      PreparedStatement pstmt = connew.prepareStatement(insertRecord);
-      pstmt.setString(1, member_id);
-      pstmt.setString(2, book_code);
+      String query = "Insert into bookissuelog "
+       + "( member_id, bookcode)"
+       + " values ("
+       + "'" + member_id + "',"
+       + "'" + book_code 
+       +"')";
       
-      pstmt.executeUpdate();
-      connew.setAutoCommit(false);     
-      showmessages.displayMessage("saved record...");
+      System.out.println("query : " + query);
+   if(handler.execAction(query)){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        String alert_message ="Success";
+        alert.setContentText(alert_message);
+        alert.showAndWait();
+      }else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        String alert_message ="Failed";
+        alert.setContentText(alert_message);
+        alert.showAndWait();
+      }     
       
-    } catch (SQLException ex) {
-      Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-    }
     btn_issue.setDisable(true);
     Update_library_issuebook(book_code);
     
   }
 
   private void Update_library_issuebook(String book_code) {
+    Connection connew = Common_Var.connew;
     int totalbook = 0;
     int borrowedBook = 0;        
     String query = "Select num_book , borrowed_book "
@@ -386,10 +327,6 @@ void loadWindow(String loc, String title){
       Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
-
-
-
-
   @FXML
   private void get_ListBorrowedBooks(ActionEvent event) {
     String book_code =tf_Borrowed_bookcode.getText();
@@ -431,7 +368,7 @@ void loadWindow(String loc, String title){
       
       while (rs.next()) {
         int id = rs.getInt("id");
-        String memberid = rs.getString("member_id");
+        String membercode = rs.getString("member_id");
         String membername = rs.getString("member_name");
         String bookcode = rs.getString("bookcode");
         String dateissue = rs.getString("issuedate");        
@@ -443,7 +380,8 @@ void loadWindow(String loc, String title){
             deleteFromBookIssue(id,bookcode);
 
                 });
-        list_BookIssue.add(new fdBookIssue(id, memberid, membername, dateissue, btndelete));
+        list_BookIssue.add(new fdBookIssue(id, membercode, membername,bookcode, 
+                dateissue, btndelete));
       } } catch (SQLException ex) {
       Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -451,7 +389,7 @@ void loadWindow(String loc, String title){
 
 }
 
-  private void deleteFromBookIssue(int id,String bookcode) {
+  private  void deleteFromBookIssue(int id,String bookcode) {
     try {
       connew.setAutoCommit(false);
       PreparedStatement myStmt_deleterec = null;
@@ -467,7 +405,8 @@ void loadWindow(String loc, String title){
     } catch (SQLException ex) {
       Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
     }
-    UpdateBook.updateMasterBook(bookcode);
+//    joven
+//    UpdateBook.updateMasterBook(bookcode);
     refresh_list();
   }
 
@@ -475,8 +414,140 @@ void loadWindow(String loc, String title){
     queryLeftJoinBooksMember(tf_Borrowed_bookcode.getText());
   }
 
- 
+  
+  /*  ------------------------
+ * call
+  ------------------------ */  
+  private void call_addTempInvoice(ActionEvent event) {
+    loadWindow("/temp_invEntry/invEntry.fxml","Add Temp Invoice Entry");
+  }
+  @FXML
+  private void call_settings(ActionEvent event) {
+      loadWindow("/Settings/Settings.fxml","Settings");
+  }
 
+  private void call_displayInvoiceTemp(ActionEvent event) {
+    loadWindow("/temp_inv/invtemp.fxml","Temp");
+//    loadWindow("/listbook/BookList.fxml","Book List");
+  }
+  @FXML
+  private void handleMenuItem_close(ActionEvent event) {
+     ((Stage) rootPane.getScene().getWindow()).close();
+  }
+  /*  --------  Book Add ---------- */  
+  @FXML
+  private void call_addBook(ActionEvent event) {
+    load_Books_Add();
+  }  
+  @FXML
+  private void handleMenuItem_addbooks(ActionEvent event) {
+    load_Books_Add();
+  }
+  void load_Books_Add(){
+  loadWindow("/addbook/FXMLDocument.fxml","Add Book");
+  }
+  
+  /*  --------  Book display /List ---------- */  
+  @FXML
+  private void call_displayBooks(ActionEvent event) {
+    
+    load_Books_List();
+  }
+  @FXML
+  private void handleMenuItem_ListBooks(ActionEvent event) {
+  
+  load_Books_List();
+  }
+  void load_Books_List(){
+     loadWindow("/listbook/BookList.fxml","Book List");
+   }
+  /*  --------  Brand add ---------- */  
+  @FXML
+  private void handleMenuItem_AddBrand(ActionEvent event) {
+    loadWindow("/BrandAdd/brandAdd.fxml","Brand Add REcord");
+  }
+  
+  @FXML
+  
+  private void handleMenuItem_BookIssueList(ActionEvent event) {
+     loadWindow("/BookViewIssues/BookViewIssues.fxml","View List");
+  }
+  
+
+  
+  /*  --------  Brand List ---------- */  
+   @FXML
+  private void handleMenuItem_ListBrand(ActionEvent event) {
+    loadWindow("/BrandList/brandlist.fxml","Temp");
+  }
+  
+
+  /*  --------  Category List ---------- */  
+  @FXML
+  private void handleMenuItem_ListCategory(ActionEvent event) {
+    load_Category_list();
+  }
+  void load_Category_list(){
+    loadWindow("/CategoryList/CategoryList.fxml","Category list");
+  }  
+
+  /*  --------  Category Add ---------- */  
+    @FXML
+  private void handleMenuItem_addcategory(ActionEvent event) {
+     load_Category_Add();
+  }
+  void load_Category_Add(){
+  loadWindow("/CategoryAdd/CategoryAdd.fxml","Category Add REcord");
+  }
+
+  /*  --------  Member Add ---------- */  
+    @FXML
+  private void call_addMember(ActionEvent event) {
+    load_Member_Add();
+  }
+  @FXML
+  private void handleMenuItem_addmember(ActionEvent event) {
+    load_Member_Add();
+  }
+  void load_Member_Add(){
+    loadWindow("/addmember/addMember.fxml","Add to Member (table)");
+  }
+
+  /*  --------  Member List ---------- */  
+  @FXML
+  private void call_displayMembers(ActionEvent event) {
+    load_Members_List();
+  }
+  @FXML
+  private void handleMenuItem_ListMember(ActionEvent event) {
+    load_Members_List();
+  }
+  void load_Members_List(){
+      loadWindow("/listmember/MemberList.fxml","Member List");
+  
+  };
+  /*  --------  temp invoice ---------- */
+  @FXML
+  private void handleMenuItem_addTempInvoice(ActionEvent event) {
+//    loadWindow("/temp_invEntry/invEntry.fxml","Add Temp Invoice Entry");
+    loadWindow("/TempInvoiceAdd/tempInvoiceAdd.fxml","Add Temp Invoice Entry 2");
+  }
+ 
+  private void call_addInvoice2(ActionEvent event) {
+    loadWindow("/TempInvoiceAdd/tempInvoiceAdd.fxml","Add Temp Invoice Entry 2");
+  }  
+  @FXML
+  private void handleMenuItem_ListTempInvoice(ActionEvent event) {
+  loadWindow("/temp_inv/invtemp.fxml","Temp");
+  }
+
+  /*  --------  xx ---------- */
+
+  @FXML
+  private void handleMenuItem_FullScreen(ActionEvent event) {
+    Stage stage= ((Stage) rootPane.getScene().getWindow());
+    stage.setFullScreen(!stage.isFullScreen());
+  }
 
 
 }

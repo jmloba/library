@@ -1,6 +1,11 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Login;
 
-package Settings;
-
+import database.DatabaseHandler;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,34 +18,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import database.DatabaseHandler;
 
 /**
  *
  * @author JovenLoba
  */
-public class Settings extends Application {
-  DatabaseHandler handler;
+
+
+public class  login extends Application {
+DatabaseHandler handler;  
   
   @Override
   public void start(Stage stage) {
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("Settings.fxml"));
-      Scene scene = new Scene(root, 450, 300);
-      stage.setScene(scene);   
-      stage.setTitle("Settings");
+      Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+      Scene scene = new Scene(root, 450, 200);
+      stage.setScene(scene);
       stage.show();
-      new Thread(()->{
-//        handler = DatabaseHandler.getInstance() ;
-      }).start();
       
-      
-      
+  
       
     } catch (IOException ex) {
-      Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
     }
-   
   }
 
   /**

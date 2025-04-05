@@ -15,7 +15,14 @@ public class fdMember {
   public  String member_name = "";
   public  String member_mobile = "";
   public  String member_email = "";
-  
+    public fdMember( String member_id, String member_name, String member_mobile, String member_email){
+    
+    this.member_id = member_id;
+    this.member_name = member_name;
+    this.member_mobile = member_mobile;
+    this.member_email = member_email;
+    
+  }
   public fdMember(int id, String member_id, String member_name, String member_mobile, String member_email){
     this.id =id;
     this.member_id = member_id;

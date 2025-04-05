@@ -16,23 +16,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import util.LibraryAssistantUtil;
 
 /**
  *
  * @author JovenLoba
  */
 public class Main extends Application {
-  
+  DatabaseHandler  handler;
   @Override
   public void start(Stage stage) throws IOException {
-     Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-    
+//    Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/Login/login.fxml"));    
     Scene scene = new Scene(root);
     
     stage.setScene(scene);
     stage.show();
+    LibraryAssistantUtil.setStageIcon(stage);
+//    DatabaseHandler.getInstance();
+
+    new Thread(()->{
+      DatabaseHandler.getInstance();
     
-    DatabaseHandler handler = DatabaseHandler.getInstance();
+    }).start();
+    
+    
   }
 
   /**

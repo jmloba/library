@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="485.0" prefWidth="815.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listbook.BookListController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="499.0" prefWidth="911.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="listbook.BookListController">
   <stylesheets>
     <URL value="@booklist.css" />
   </stylesheets>
    <children>
-      <VBox layoutX="24.0" layoutY="32.0" prefHeight="485.0" prefWidth="815.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="24.0" layoutY="32.0" prefHeight="499.0" prefWidth="850.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TableView fx:id="table_View" prefHeight="524.0" prefWidth="815.0">
+            <TableView fx:id="table_View" prefHeight="499.0" prefWidth="837.0">
               <columns>
-                <TableColumn fx:id="col_code" prefWidth="117.0" text="Code" />
-                <TableColumn fx:id="col_title" minWidth="0.0" prefWidth="201.0" text="Title" />
+                <TableColumn fx:id="col_code" prefWidth="130.0" text="Code" />
+                <TableColumn fx:id="col_title" minWidth="0.0" prefWidth="144.0" text="Title" />
                   <TableColumn fx:id="col_author" prefWidth="133.0" text="Author" />
                   <TableColumn fx:id="col_publisher" prefWidth="112.0" text="Publisher" />
                   <TableColumn fx:id="col_availability" prefWidth="155.0" text="Availability" />
@@ -25,6 +27,16 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="ui" />
+                      <MenuItem mnemonicParsing="false" onAction="#handleBookDeleteOption" text="Delete" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleRefreshList" text="Refresh" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleEditOption" text="Edit REcord" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </TableView>
          </children>
       </VBox>

@@ -1,1 +1,1 @@
-{"ndaysWOFine":44,"finePerDay":3.0,"username":"adminy","password":"admin"}
+{"ndaysWOFine":14,"finePerDay":50.0,"username":"admin","password":"d6ac022931a66a2bcc244db91818ebec76ce5e18"}

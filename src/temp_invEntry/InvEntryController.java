@@ -64,7 +64,7 @@ public class InvEntryController implements Initializable {
 //    Common_Var.connew = connect.getConnection();
     connew =Common_Var.connew;
     boolean showmessage = Common_Var.showmessage;
-    handler = DatabaseHandler.getInstance() ;
+//    handler = DatabaseHandler.getInstance() ;
     viewCurrentConnection.showCurrentConnection("temp_invEntry", "temp invoice entry ", connew);
 
     checkdata();

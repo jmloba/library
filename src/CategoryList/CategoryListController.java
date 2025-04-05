@@ -36,12 +36,11 @@ public class CategoryListController implements Initializable {
   private TableColumn<fdCategory, String> col_categorydesc;
   
   ObservableList<fdCategory> list = FXCollections.observableArrayList();
-  static DatabaseHandler handler;
+  DatabaseHandler handler;
+  
   Connection connew = null;
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-//     DatabaseConnection connect = new DatabaseConnection();
-//    Common_Var.connew = connect.getConnection();
     connew =Common_Var.connew;
     boolean showmessage = Common_Var.showmessage;
     handler = DatabaseHandler.getInstance() ;

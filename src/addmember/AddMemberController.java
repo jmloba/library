@@ -6,6 +6,7 @@ package addmember;
 import database.DatabaseHandler;
 import database.Common_Var;
 import database.DatabaseConnection;
+import fds.fdMember;
 import generalRoutines.showmessages;
 import generalRoutines.viewCurrentConnection;
 import generalRoutines.routineInitialization;
@@ -48,21 +49,17 @@ public class AddMemberController implements Initializable {
   private Button btn_cancel;
   @FXML
   private AnchorPane rootPane;
-  Connection connew = null;
-  static DatabaseHandler  handler;
+  
+  DatabaseHandler handler;
+  private Boolean isInEditMode= Boolean.FALSE;
 
-  /**
-   * Initializes the controller class.
-   */
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-//    DatabaseConnection connect = new DatabaseConnection();
-//    Common_Var.connew = connect.getConnection();
+    handler =  DatabaseHandler.getInstance();
     boolean showmessage = Common_Var.showmessage;
-    connew = Common_Var.connew ;
-    handler = DatabaseHandler.getInstance() ;
-    viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
     
+    
+
     checkdata();
   }  
 
@@ -83,9 +80,16 @@ public class AddMemberController implements Initializable {
       alert.setContentText(alert_message);
       alert.showAndWait();
       return;
-    } else{
+    } 
+    if(isInEditMode){
+      handleEditOperation();
+    }
+    else{
+    
       saveMember(id,name,email,mobile);
-            }
+    }
+      
+      
   }
 
   @FXML
@@ -102,6 +106,7 @@ public class AddMemberController implements Initializable {
       + "'"+mobile  + "',"
       + "'"+email   + "')";
     showmessages.displayMessage("query : "+ query);
+    
           
           
   if(handler.execAction(query)){
@@ -133,4 +138,33 @@ public class AddMemberController implements Initializable {
     }
 
   }
+
+  public void inflateUI(fdMember selectedForEdit) {
+    tf_name.setText(selectedForEdit.member_name);
+    tf_id.setText(selectedForEdit.member_id);
+    tf_email.setText(selectedForEdit.member_email);
+    tf_mobile.setText(selectedForEdit.member_mobile);
+    
+    tf_id.setDisable(true);
+    isInEditMode= Boolean.TRUE;
+    
+    
+  }
+
+  private void handleEditOperation() {
+    fdMember member = new fdMember(
+      tf_id.getText(),      tf_name.getText(),
+      tf_mobile.getText(),  tf_email.getText()
+    );
+    if(handler.updateMember(member)){
+       AlertMaker.AlertMaker.showSimpleAlert("Member Updated", "Member record has been saved");
+    }else{
+      AlertMaker.AlertMaker.showErrorMessage("Member Update Failed", "cannot update member table");
+    }
+            
+    
+    
+  }
+   
+   
 }

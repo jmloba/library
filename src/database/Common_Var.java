@@ -12,7 +12,7 @@ import java.sql.Connection;
  */
 public class Common_Var {
     public static Connection connew  = null;
-    public static Boolean showmessage   = false;
+    public static Boolean showmessage   = true;
     
     public static Connection ctree_cbl  = null;
     public static String myloginName = "";

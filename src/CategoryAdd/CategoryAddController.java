@@ -40,7 +40,7 @@ public class CategoryAddController implements Initializable {
 //    Common_Var.connew = connect.getConnection();
     boolean showmessage = Common_Var.showmessage;
     connew = Common_Var.connew ;
-    handler = DatabaseHandler.getInstance() ;
+//    handler = DatabaseHandler.getInstance() ;
     viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
     
     checkdata();

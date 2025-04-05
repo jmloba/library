@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.prefs.Preferences;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class Preference {
   
@@ -24,7 +25,7 @@ public class Preference {
     ndaysWOFine =14;
     finePerDay = 50 ; 
     username = "admin";
-    password = "admin";
+    setPassword("admin");
     
   }
 
@@ -56,8 +57,15 @@ public class Preference {
     return password;
   }
 
-  public void setPassword(String password) {
+  public  void setPassword(String password) {
+    if (password.length()<16){
+       this.password = DigestUtils.shaHex(password);
+    }else{
     this.password = password;
+    }
+    
+    
+    
   }
   public static void initConfig(){
     Writer writer = null;

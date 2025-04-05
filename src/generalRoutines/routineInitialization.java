@@ -24,7 +24,7 @@ public class routineInitialization {
 //    Common_Var.connew = connect.getConnection();
     connew =Common_Var.connew;
     boolean showmessage = Common_Var.showmessage;
-    handler = DatabaseHandler.getInstance() ;
+//    handler = DatabaseHandler.getInstance() ;
     viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
 
     

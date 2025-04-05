@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="532.0" prefWidth="1044.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="BookViewIssues.BookViewIssuesController">
+   <children>
+      <VBox layoutX="34.0" layoutY="41.0" prefHeight="532.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TableView fx:id="table_View" prefHeight="525.0" prefWidth="655.0">
+               <columns>
+                  <TableColumn fx:id="col_id" prefWidth="117.0" text="id" />
+                  <TableColumn fx:id="col_memberId" prefWidth="130.0" text="Member id" />
+                  <TableColumn fx:id="col_memberName" prefWidth="130.0" text="Name" />
+                  <TableColumn fx:id="col_bookcode" minWidth="0.0" prefWidth="164.0" text="Book Code" />
+                  <TableColumn fx:id="col_bookName" prefWidth="162.0" text="BookName" />
+                  <TableColumn fx:id="col_dateIssue" prefWidth="212.0" text="IssueDate" />
+                  <TableColumn fx:id="col_btndelete" prefWidth="212.0" text="Delete Record" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -75,7 +75,7 @@ ObservableList list_data = FXCollections.observableArrayList();
     
     connew = Common_Var.connew ;
     showmessage = Common_Var.showmessage;
-    handler = DatabaseHandler.getInstance() ;
+//    handler = DatabaseHandler.getInstance() ;
     viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
             myfunction.numbersOnly(tf_quantity);
         myfunction.decimalNumberFormat(tf_price);

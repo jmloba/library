@@ -24,6 +24,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.activation.DataHandler;
+import listbook.BookListController;
 
 public class FXMLDocumentController implements Initializable {
 
@@ -39,24 +40,28 @@ public class FXMLDocumentController implements Initializable {
   private Button btn_save;
   @FXML
   private Button btn_cancel;
-  
-  Connection connew = null;
-  DatabaseHandler handler;
-  
   @FXML
   private AnchorPane rootPane;
   @FXML
   private TextField tf_quantity;
+  
+  private Boolean isInEditMode= Boolean.FALSE;
+  
+  
+  Connection connew = null;
+  DatabaseHandler handler;
 
   
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-//    DatabaseConnection connect = new DatabaseConnection();
-//    Common_Var.connew = connect.getConnection();
+    handler =  DatabaseHandler.getInstance();
+    
     boolean showmessage = Common_Var.showmessage;
     connew = Common_Var.connew ;
-    handler = DatabaseHandler.getInstance() ;
-    viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
+
+
+//    handler = DatabaseHandler.getInstance() ;
+//    viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
     
   }
   @FXML
@@ -66,6 +71,8 @@ public class FXMLDocumentController implements Initializable {
     String bookTitle = tf_BookTitle.getText();
     String bookAuthor = tf_BookAuthor.getText();
     String bookPublisher = tf_BookPublisher.getText();
+    
+    
     Integer bookquantity = Integer.valueOf(tf_quantity.getText());
     
     if (bookCode.isEmpty() || bookTitle.isEmpty() || bookAuthor.isEmpty() || bookPublisher.isEmpty()) {
@@ -75,7 +82,11 @@ public class FXMLDocumentController implements Initializable {
       alert.setContentText(alert_message);
       alert.showAndWait();
       return;
-    } else {
+    } 
+    if (isInEditMode  ){
+        handleEditOperation();
+    }
+    else{
       saveBook(bookCode, bookTitle, bookAuthor, bookPublisher, bookquantity );
     }
   }
@@ -85,7 +96,7 @@ public class FXMLDocumentController implements Initializable {
     Stage stage = (Stage) rootPane.getScene().getWindow();
     stage.close();
   }
-
+  
   private void saveBook(String code, String title, String author, String publisher , int quantity) {
     int avail_flag = 0;
     if (quantity >0){
@@ -132,5 +143,33 @@ public class FXMLDocumentController implements Initializable {
       Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
     }
 
+  }
+  public void inflateUI(BookListController.Book book){
+    tf_BookTitle.setText(book.getTitle());
+    tf_BookCode.setText(book.getCode());
+    tf_BookCode.setDisable(true);
+    tf_BookAuthor.setText(book.getAuthor());
+    tf_BookPublisher.setText(book.getPublisher());
+    
+    
+    tf_quantity.setText(book.getBook_onShelf().toString());
+    tf_quantity.setEditable(false);
+    tf_quantity.setDisable(true);
+    
+    isInEditMode= Boolean.TRUE;
+    
+  }
+
+  private void handleEditOperation() {
+    BookListController.Book book = new BookListController.Book(
+      tf_BookCode.getText(), tf_BookTitle.getText(),
+      tf_BookAuthor.getText(),tf_BookPublisher.getText(), 
+      true ,Integer.valueOf(tf_quantity.getText()) 
+      );
+    if (handler.updateBook(book)){
+      AlertMaker.AlertMaker.showSimpleAlert("Updated", "record has been saved");
+    }else{
+      AlertMaker.AlertMaker.showErrorMessage("Update Failed", "cannot update database");
+    }
   }
 }

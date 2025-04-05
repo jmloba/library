@@ -23,7 +23,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="773.0" prefWidth="947.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainController">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainController">
    <children>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <top>
@@ -31,14 +31,50 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_close" text="Close" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Add">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_addbooks" text="Add Book" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_addmember" text="Add Member" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Display">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_ListMember" text="Display Member" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_ListBooks" text="List Books" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_FullScreen" text="Toggle FullScreen" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_BookIssueList" text="Book Issues" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" onAction="#handleMenuItem_BookIssueList" text="Sales">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Category">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_addcategory" text="Add" />
+                            <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_ListCategory" text="List" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Temp Invoice">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_addTempInvoice" text="Add Record Temp Invoice" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_ListTempInvoice" text="List Temp Invoice" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Brand">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_AddBrand" text="Add" />
+                              <MenuItem mnemonicParsing="false" onAction="#handleMenuItem_ListBrand" text="List" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="??">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                           </items>
+                        </Menu>
+                    </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem mnemonicParsing="false" text="About" />
@@ -101,63 +137,6 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
               <tabs>
-                  <Tab text="Book List">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox layoutX="96.0" layoutY="46.0" prefHeight="492.0" prefWidth="812.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox prefHeight="58.0" prefWidth="812.0" />
-                                    <TableView prefHeight="328.0" prefWidth="812.0">
-                                      <columns>
-                                        <TableColumn prefWidth="75.0" text="C1" />
-                                        <TableColumn prefWidth="75.0" text="C2" />
-                                      </columns>
-                                    </TableView>
-                                    <HBox prefHeight="128.0" prefWidth="812.0">
-                                       <children>
-                                          <VBox maxWidth="1.7976931348623157E308" prefHeight="91.0" prefWidth="471.0">
-                                             <children>
-                                                <HBox prefHeight="91.0" prefWidth="131.0">
-                                                   <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book Info" wrappingWidth="395.6708984375" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Title" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Author" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Publisher" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Availability" />
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                          <VBox maxWidth="1.7976931348623157E308" prefHeight="91.0" prefWidth="499.0" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                    </content>
-                  </Tab>
                 <Tab text="Book Issue">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -335,62 +314,65 @@
                         </AnchorPane>
                      </content>
                   </Tab>
+                  <Tab text="Book List">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="96.0" layoutY="46.0" prefHeight="492.0" prefWidth="812.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <HBox prefHeight="58.0" prefWidth="812.0" />
+                                    <TableView prefHeight="328.0" prefWidth="812.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="C1" />
+                                        <TableColumn prefWidth="75.0" text="C2" />
+                                      </columns>
+                                    </TableView>
+                                    <HBox prefHeight="128.0" prefWidth="812.0">
+                                       <children>
+                                          <VBox maxWidth="1.7976931348623157E308" prefHeight="91.0" prefWidth="471.0">
+                                             <children>
+                                                <HBox prefHeight="91.0" prefWidth="131.0">
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Book Info" wrappingWidth="395.6708984375" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Title" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Author" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Publisher" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="95.0" text="Availability" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="302.6708984375" />
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </center>
-         <bottom>
-            <VBox prefHeight="108.0" prefWidth="947.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox prefHeight="64.0" prefWidth="947.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#call_displayInvoiceTemp" prefHeight="50.0" prefWidth="175.0" text="Temp Inv" />
-                        <Button mnemonicParsing="false" onAction="#call_addTempInvoice" prefHeight="50.0" prefWidth="175.0" text="Add Temp Inv1">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/receipt.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#call_addInvoice2" text="Add Invoice" />
-                     </children>
-                  </HBox>
-                  <HBox prefHeight="63.0" prefWidth="947.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#call_addCategory" prefHeight="50.0" prefWidth="171.0" text="Category Add" />
-                        <Button mnemonicParsing="false" onAction="#call_listCategory" prefHeight="50.0" prefWidth="137.0" text="CategoryList">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/brand.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#call_addBrand" prefHeight="50.0" prefWidth="150.0" text="Brand Add">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/brand.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button mnemonicParsing="false" onAction="#call_displayBrand" prefHeight="50.0" prefWidth="150.0" text="Brand List">
-                           <graphic>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../icons/receipt.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </bottom>
       </BorderPane>
    </children>
 </StackPane>

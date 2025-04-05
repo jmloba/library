@@ -40,4 +40,13 @@ public class AlertMaker {
   alert.showAndWait();
   
   } 
+  public static void showErrorMessage(String title, String content){
+  Alert alert = new Alert(AlertType.ERROR);
+  alert.setTitle(title);
+  alert.setHeaderText(null);
+  alert.setContentText(content);
+//  alert.setContentText(ex.toString());
+  alert.showAndWait();
+  
+  }
 }

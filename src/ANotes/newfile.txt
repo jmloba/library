@@ -1,0 +1,12 @@
+Add Book
+List Book 
+
+Video # 6
+Genuine Coder
+JavaFX Library Software From Scratch #6: Adding Members to the Database
+https://www.youtube.com/watch?v=xhoaYmLk9eE
+Add member
+
+
+#9 Make DatabaseHandler private : no classes can make another object
+4:02

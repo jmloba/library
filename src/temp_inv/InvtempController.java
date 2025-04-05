@@ -59,11 +59,9 @@ public class InvtempController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-//    DatabaseConnection connect = new DatabaseConnection();
-//    Common_Var.connew = connect.getConnection();
     connew =Common_Var.connew;
     boolean showmessage = Common_Var.showmessage;
-//    
+
     handler = DatabaseHandler.getInstance() ;
     viewCurrentConnection.showCurrentConnection("temp_inv","Invoice Temp List ", connew);
     init_column();
